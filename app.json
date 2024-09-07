@@ -1,0 +1,16 @@
+{
+  "name": "Confraria",
+  "version": "0.0.1",
+  "slug": "confraria",
+  "scheme": "confraria",
+  "icon": "./assets/icon.png",
+  "splash": {
+    "image": "./assets/splash.png"
+  },
+  "android": {
+    "adaptiveIcon": {
+      "foregroundImage": "./assets/adaptive-icon.png"
+    }
+  },
+  "plugins": ["expo-router"]
+}
