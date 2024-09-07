@@ -3,7 +3,7 @@ import { ExpoConfig } from "expo/config";
 const appConfig: ExpoConfig = {
   name: "Confraria",
   slug: "confraria",
-  version: "0.0.1",
+  scheme: "confraria",
   icon: "./assets/icon.png",
   splash: {
     image: "./assets/splash.png",
@@ -13,6 +13,7 @@ const appConfig: ExpoConfig = {
       foregroundImage: "./assets/adaptive-icon.png",
     },
   },
+  plugins: ["expo-router"],
 };
 
 export default appConfig;
