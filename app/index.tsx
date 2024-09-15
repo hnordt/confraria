@@ -31,21 +31,21 @@ const videos = [
       "https://plus.unsplash.com/premium_photo-1661373294056-8ff95e69c18e?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     title: "Full Body",
     category: 1,
-    number: 6,
+    number: 10,
   },
   {
     imageUrl:
       "https://images.unsplash.com/photo-1434596922112-19c563067271?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     title: "Treino Funcional",
     category: 1,
-    number: 12,
+    number: 11,
   },
   {
     imageUrl:
       "https://images.unsplash.com/photo-1550259979-ed79b48d2a30?q=80&w=2136&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     title: "Treino de Hipertrofia",
     category: 1,
-    number: 12,
+    number: 8,
   },
   {
     imageUrl:
@@ -59,7 +59,7 @@ const videos = [
       "https://images.unsplash.com/photo-1607962837359-5e7e89f86776?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     title: "Power Burn",
     category: 2,
-    number: 4,
+    number: 7,
   },
   {
     imageUrl:
@@ -160,7 +160,7 @@ function Videos(props: { videos: typeof videos }) {
                 lineHeight: 20,
               }}
             >
-              {video.number} vídeos
+              {video.number}min
             </Text>
           </View>
         </View>
