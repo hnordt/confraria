@@ -5,17 +5,11 @@ import {
   StyleSheet,
   Pressable,
   Text,
-  TouchableWithoutFeedback,
+  ScrollView,
 } from "react-native"
-import {
-  Audio,
-  InterruptionModeAndroid,
-  InterruptionModeIOS,
-  ResizeMode,
-  Video,
-} from "expo-av"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import Ionicons from "@expo/vector-icons/Ionicons"
+import { Image } from "expo-image"
 import {
   useFonts,
   Inter_100Thin,
@@ -28,14 +22,154 @@ import {
   Inter_800ExtraBold,
   Inter_900Black,
 } from "@expo-google-fonts/inter"
-import { SplashScreen } from "expo-router"
-import Slider from "../components/Slider"
+import { BlurView } from "expo-blur"
+import { LinearGradient } from "expo-linear-gradient"
 
-const VideoPlayer = () => {
-  const video = useRef(null)
-  const [status, setStatus] = useState({})
-  const [rate, setRate] = useState(1)
+const videos = [
+  {
+    imageUrl:
+      "https://plus.unsplash.com/premium_photo-1661373294056-8ff95e69c18e?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Full Body",
+    category: 1,
+    number: 6,
+  },
+  {
+    imageUrl:
+      "https://images.unsplash.com/photo-1434596922112-19c563067271?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Treino Funcional",
+    category: 1,
+    number: 12,
+  },
+  {
+    imageUrl:
+      "https://images.unsplash.com/photo-1550259979-ed79b48d2a30?q=80&w=2136&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Treino de Hipertrofia",
+    category: 1,
+    number: 12,
+  },
+  {
+    imageUrl:
+      "https://plus.unsplash.com/premium_photo-1678304224523-d25b4117558f?q=80&w=2187&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Treino Express",
+    category: 2,
+    number: 4,
+  },
+  {
+    imageUrl:
+      "https://images.unsplash.com/photo-1607962837359-5e7e89f86776?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Power Burn",
+    category: 2,
+    number: 4,
+  },
+  {
+    imageUrl:
+      "https://images.unsplash.com/photo-1620213391117-0d169a917221?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Desafio de Força",
+    category: 2,
+    number: 8,
+  },
+  {
+    imageUrl:
+      "https://plus.unsplash.com/premium_photo-1661443931307-2f75249a530e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Desvendando a si mesmo",
+    category: 3,
+    number: 8,
+  },
+  {
+    imageUrl:
+      "https://images.unsplash.com/reserve/YEc7WB6ASDydBTw6GDlF_antalya-beach-lulu.jpg?q=80&w=3101&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Meditação",
+    category: 3,
+    number: 8,
+  },
+  {
+    imageUrl:
+      "https://images.unsplash.com/photo-1620110488106-dad904f50930?q=80&w=2969&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Emoções",
+    category: 3,
+    number: 8,
+  },
+]
 
+function Heading(props: { children: React.ReactNode }) {
+  return (
+    <View
+      style={{
+        paddingHorizontal: 20,
+        paddingBottom: 12,
+      }}
+    >
+      <Text
+        style={{
+          fontFamily: "Inter_600SemiBold",
+          fontSize: 24,
+          lineHeight: 32,
+          color: "#111827",
+        }}
+      >
+        {props.children}
+      </Text>
+    </View>
+  )
+}
+
+function Videos(props: { videos: typeof videos }) {
+  return (
+    <ScrollView
+      snapToInterval={152 + 12}
+      decelerationRate="fast"
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={{
+        flexDirection: "row",
+        gap: 12,
+        paddingHorizontal: 20,
+      }}
+    >
+      {props.videos.map((video) => (
+        <View key={video.title} style={{ width: 152 }}>
+          <Image
+            style={{
+              borderRadius: 8,
+              height: 152,
+            }}
+            source={video.imageUrl}
+            contentFit="cover"
+          />
+          <View
+            style={{
+              marginTop: 8,
+            }}
+          >
+            <Text
+              style={{
+                fontFamily: "Inter_500Medium",
+                fontSize: 14,
+                lineHeight: 20,
+                color: "#111827",
+              }}
+              numberOfLines={1}
+            >
+              {video.title}
+            </Text>
+            <Text
+              style={{
+                fontFamily: "Inter_400Regular",
+                color: "#64748b",
+                fontSize: 14,
+                lineHeight: 20,
+              }}
+            >
+              {video.number} vídeos
+            </Text>
+          </View>
+        </View>
+      ))}
+    </ScrollView>
+  )
+}
+
+export default function Playground() {
   const insets = useSafeAreaInsets()
 
   const [loaded] = useFonts({
@@ -50,330 +184,95 @@ const VideoPlayer = () => {
     Inter_900Black,
   })
 
-  React.useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync()
-    }
-  }, [loaded])
-
   if (!loaded) {
     return null
   }
 
-  // console.log(status)
-
   return (
     <View
-      style={{
-        flex: 1,
-        backgroundColor: "#000",
-        paddingTop: insets.top,
-        paddingBottom: insets.bottom + 24,
-      }}
+      style={
+        {
+          // paddingTop: insets.top,
+          // paddingBottom: 32,
+          // paddingHorizontal: 24,
+        }
+      }
     >
-      <Video
-        source={{
-          uri: "https://videos.pexels.com/video-files/4057322/4057322-uhd_1440_2732_25fps.mp4",
-        }}
-        useNativeControls={false}
-        // shouldPlay
-        resizeMode="cover"
-        style={{
-          flex: 1,
-          // width: "100%",
-          // borderRadius: 24,
-        }}
-      />
-      <Ionicons
-        name="close"
-        size={32}
-        color="#d1d5db"
-        style={{
-          // borderWidth: 1,
-          // borderColor: "red",
-          position: "absolute",
-          top: insets.top + 24,
-          right: 24,
-        }}
-      />
+      <View>
+        <Image
+          style={{
+            height: 248,
+          }}
+          source="https://plus.unsplash.com/premium_photo-1670505062582-fdaa83c23c9e?q=80&w=2342&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          contentFit="cover"
+        />
+        <LinearGradient
+          colors={["rgba(0, 0, 0, 0.25)", "transparent"]}
+          style={{ position: "absolute", top: 0, bottom: 0, left: 0, right: 0 }}
+        />
+      </View>
       <View
         style={{
-          paddingVertical: 24,
-          // paddingHorizontal: 24,
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-around",
-          // borderWidth: 1,
-          // borderColor: "red",
-          // gap: 24,
           position: "absolute",
-          bottom: insets.bottom + 24,
-          left: 0,
-          right: 0,
-          backgroundColor: "rgba(0, 0, 0, 0.8)",
-          // opacity: 0.7,
+          top: insets.top,
+          left: 24,
+          width: 32,
+          height: 32,
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          borderRadius: 16,
         }}
       >
-        <View
-          style={{
-            height: 8,
-            backgroundColor: "#374151",
-            // borderRadius: 8,
-            position: "absolute",
-            top: -8,
-            left: 0,
-            right: 0,
-          }}
-        >
-          <View
-            style={{
-              backgroundColor: "#2563eb",
-              width: "30%",
-              height: 8,
-              // borderRadius: 8,
-            }}
-          >
-            <View
-              style={{
-                width: 16,
-                height: 16,
-                borderRadius: 8,
-                backgroundColor: "#2563eb",
-                position: "absolute",
-                right: -8,
-                top: -4,
-              }}
-            />
-          </View>
-        </View>
         <Ionicons
-          name="pause"
-          size={32}
-          color="#d1d5db"
-          style={
-            {
-              // borderWidth: 1,
-              // borderColor: "red",
-            }
-          }
+          name="chevron-back"
+          size={24}
+          color="rgba(255, 255, 255, 0.9)"
+          style={{
+            marginLeft: -2,
+          }}
         />
-        {/* <Text
+      </View>
+      <View style={{ paddingTop: 24, paddingHorizontal: 24 }}>
+        <Text
           style={{
-            fontFamily: "Inter_500Medium",
-            fontSize: 16,
-            lineHeight: 20,
-            color: "#6b7280",
+            fontFamily: "Inter_700Bold",
+            fontSize: 30,
+            lineHeight: 36,
+            color: "#111827",
           }}
         >
-          <Text style={{ color: "#d1d5db" }}>34:45</Text> / 56:23
-        </Text> */}
-        <View
-          style={{
-            alignItems: "center",
-          }}
-        >
-          <Text
-            style={{
-              fontFamily: "Inter_500Medium",
-              fontSize: 16,
-              lineHeight: 20,
-              color: "#d1d5db",
-            }}
-          >
-            <Text style={{ color: "#d1d5db" }}>34:45</Text> / 56:23
-          </Text>
-        </View>
+          Treinos na academia
+        </Text>
         <Text
           style={{
             fontFamily: "Inter_500Medium",
+            color: "#6b7280",
             fontSize: 16,
-            lineHeight: 20,
-            color: "#d1d5db",
+            lineHeight: 24,
           }}
         >
-          1.0X
+          21 vídeos &middot; 3h36min
         </Text>
-        {/* <View
-          style={{
-            // borderRadius: 32,
-            // borderColor: "#d1d5db",
-            // borderWidth: 1,
-            // width: 36,
-            // height: 36,
-            // justifyContent: "center",
-            // alignItems: "center",
-            backgroundColor: "#d1d5db",
-            paddingVertical: 0,
-            paddingHorizontal: 8,
-            borderRadius: 32,
-          }}
-        >
-          <Text
-            style={{
-              fontFamily: "Inter_600SemiBold",
-              fontSize: 12,
-              lineHeight: 20,
-              color: "#6b7280",
-            }}
-          >
-            <Text style={{ color: "#000", letterSpacing: 1 }}>1.0X</Text>
-          </Text>
-        </View> */}
-        {/* <Ionicons
-          name="scan"
-          size={32}
-          color="#d1d5db"
-          style={
-            {
-              // borderWidth: 1,
-              // borderColor: "red",
-            }
-          }
-        /> */}
       </View>
-    </View>
-  )
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: "#000",
-        paddingTop: insets.top,
-      }}
-    >
-      {/* <Video
-        ref={video}
-        source={{
-          uri: "https://videos.pexels.com/video-files/4057322/4057322-uhd_1440_2732_25fps.mp4",
-        }}
-        rate={rate}
-        useNativeControls={false}
-        onPlaybackStatusUpdate={setStatus}
-        // shouldPlay={status.isPlaying}
-        resizeMode="cover"
-        style={{
-          flex: 1,
-          borderRadius: 32,
-        }}
-      /> */}
-      <View>
-        <CustomSlider />
-      </View>
-      <View
-        style={{
-          paddingTop: 20,
-          flexDirection: "row",
-          alignItems: "center",
-          paddingBottom: insets.bottom,
-          // gap: 16,
-          // borderWidth: 2,
-          // borderColor: "red",
-          paddingHorizontal: 32,
+      <ScrollView
+        contentContainerStyle={{
+          paddingVertical: 32,
         }}
       >
-        <View />
-        <Pressable
-          style={{
-            flex: 1,
-            // borderWidth: 2,
-            // borderColor: "red",
-          }}
-          onPress={() => {
-            if (
-              status.durationMillis === status.positionMillis &&
-              !status.isLooping
-            ) {
-              video.current.playFromPositionAsync(0)
-              return
-            }
-
-            status.isPlaying
-              ? video.current.pauseAsync()
-              : video.current.playAsync()
-          }}
-        >
-          <Ionicons
-            name={
-              status.durationMillis === status.positionMillis &&
-              !status.isLooping
-                ? "refresh"
-                : status.isPlaying
-                ? "pause"
-                : "play"
-            }
-            size={32}
-            color="#fff"
-          />
-        </Pressable>
-        <View
-          style={{
-            flex: 1,
-          }}
-        />
-        <Pressable
-          style={{
-            flex: 1,
-            alignItems: "flex-end",
-          }}
-          onPress={() => {
-            setRate((rate) => {
-              switch (rate) {
-                case 0.5: {
-                  return 1
-                }
-
-                case 1: {
-                  return 1.5
-                }
-
-                case 1.5: {
-                  return 2
-                }
-
-                case 2: {
-                  return 0.5
-                }
-
-                default: {
-                  return 1
-                }
-              }
-            })
-          }}
-        >
-          <Text
-            style={{
-              fontFamily: "Inter_600SemiBold",
-              fontSize: 14,
-              lineHeight: 20,
-              color: "#fff",
-              opacity: 0.5,
-            }}
-          >
-            Velocidade
-          </Text>
-          <Text
-            style={{
-              fontFamily: "Inter_600SemiBold",
-              fontSize: 14,
-              lineHeight: 20,
-              color: "#fff",
-            }}
-          >
-            {rate === 0.5
-              ? "Lento"
-              : rate === 1
-              ? "Normal"
-              : rate === 1.5
-              ? "Rápido"
-              : "Super Rápido"}{" "}
-            {rate}x
-          </Text>
-        </Pressable>
-      </View>
+        <View>
+          <Heading>Segunda-feira</Heading>
+          <Videos videos={videos.filter((video) => video.category === 2)} />
+        </View>
+        <View style={{ marginTop: 24 }}>
+          <Heading>Terça-feira</Heading>
+          <Videos videos={videos.filter((video) => video.category === 1)} />
+        </View>
+        <View style={{ marginTop: 24 }}>
+          <Heading>Quarta-feira</Heading>
+          <Videos videos={videos.filter((video) => video.category === 3)} />
+        </View>
+      </ScrollView>
     </View>
   )
 }
-
-export default VideoPlayer
