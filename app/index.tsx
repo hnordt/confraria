@@ -198,66 +198,130 @@ export default function Playground() {
         }
       }
     >
-      <View>
-        <Image
-          style={{
-            height: 248,
-          }}
-          source="https://plus.unsplash.com/premium_photo-1670505062582-fdaa83c23c9e?q=80&w=2342&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          contentFit="cover"
-        />
-        <LinearGradient
-          colors={["rgba(0, 0, 0, 0.25)", "transparent"]}
-          style={{ position: "absolute", top: 0, bottom: 0, left: 0, right: 0 }}
-        />
-      </View>
       <View
         style={{
-          position: "absolute",
-          top: insets.top,
-          left: 24,
-          width: 32,
-          height: 32,
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
-          borderRadius: 16,
+          backgroundColor: "#fff",
+          paddingTop: insets.top,
         }}
       >
-        <Ionicons
-          name="chevron-back"
-          size={24}
-          color="rgba(255, 255, 255, 0.9)"
+        <View
           style={{
-            marginLeft: -2,
-          }}
-        />
-      </View>
-      <View style={{ paddingTop: 24, paddingHorizontal: 24 }}>
-        <Text
-          style={{
-            fontFamily: "Inter_700Bold",
-            fontSize: 30,
-            lineHeight: 36,
-            color: "#111827",
+            flexDirection: "row",
+            marginLeft: 20,
+            alignItems: "center",
+            gap: 2,
           }}
         >
-          Treinos na academia
-        </Text>
-        <Text
+          <Ionicons
+            name="chevron-back"
+            size={28}
+            color="#111827"
+            style={{ marginLeft: -5 }}
+          />
+          {/* <Text
+            style={{
+              fontSize: 14,
+              fontFamily: "Inter_500Medium",
+              color: "#111827",
+            }}
+          >
+            Voltar
+          </Text> */}
+        </View>
+        {/* <Image
+          style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
+          source="https://plus.unsplash.com/premium_photo-1670505062582-fdaa83c23c9e?q=80&w=2342&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          contentFit="cover"
+        /> */}
+        {/* <BlurView
+          intensity={100}
+          style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
+        /> */}
+        <View
           style={{
-            fontFamily: "Inter_500Medium",
-            color: "#6b7280",
-            fontSize: 16,
-            lineHeight: 24,
+            paddingTop: 32,
+            // paddingBottom: 32,
+            // alignItems: "center",
+            paddingBottom: 0,
+            paddingHorizontal: 20,
           }}
         >
-          21 vídeos &middot; 3h36min
-        </Text>
+          {/* <View
+            style={{
+              shadowOpacity: 0.2,
+              shadowColor: "black",
+              shadowRadius: 30,
+              shadowOffset: {
+                width: 0,
+                height: 32,
+              },
+              marginBottom: 16,
+            }}
+          >
+            <Image
+              source="https://plus.unsplash.com/premium_photo-1670505062582-fdaa83c23c9e?q=80&w=2342&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              contentFit="cover"
+              style={{
+                width: 200,
+                height: 200,
+                borderRadius: 8,
+              }}
+            />
+          </View> */}
+          <Text
+            style={{
+              fontFamily: "Inter_700Bold",
+              fontSize: 30,
+              lineHeight: 36,
+              color: "#111827",
+              // color: "rgba(255, 255, 255, 0.85)",
+            }}
+          >
+            Treinos na academia
+          </Text>
+          <Text
+            style={{
+              fontFamily: "Inter_500Medium",
+              color: "#6b7280",
+              fontSize: 16,
+              lineHeight: 24,
+              // color: "rgba(255, 255, 255, 0.65)",
+            }}
+          >
+            21 vídeos &middot; 3h36min
+          </Text>
+        </View>
+        {/* <LinearGradient
+          colors={["rgba(0, 0, 0, 0.1)", "rgba(0, 0, 0, 0.5)"]}
+          style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
+        /> */}
+        {/* <View
+          style={{
+            position: "absolute",
+            top: insets.top,
+            left: 24,
+            width: 32,
+            height: 32,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            borderRadius: 16,
+          }}
+        >
+          <Ionicons
+            name="chevron-back"
+            size={24}
+            color="rgba(255, 255, 255, 0.9)"
+            style={{
+              marginLeft: -2,
+            }}
+          />
+        </View> */}
       </View>
       <ScrollView
         contentContainerStyle={{
           paddingVertical: 32,
+          backgroundColor: "white",
         }}
       >
         <View>
