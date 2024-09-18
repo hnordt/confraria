@@ -223,8 +223,8 @@ export default function Playground() {
         >
           <View
             style={{
-              width: 30,
-              height: 30,
+              width: 32,
+              height: 32,
               backgroundColor: "#f3f4f6",
               alignItems: "center",
               justifyContent: "center",
@@ -233,7 +233,7 @@ export default function Playground() {
           >
             <MaterialCommunityIcons
               name="chevron-left"
-              size={26}
+              size={28}
               color="#111827"
               style={
                 {
@@ -254,8 +254,8 @@ export default function Playground() {
           >
             <View
               style={{
-                width: 30,
-                height: 30,
+                width: 32,
+                height: 32,
                 backgroundColor: "#f3f4f6",
                 alignItems: "center",
                 justifyContent: "center",
@@ -264,7 +264,7 @@ export default function Playground() {
             >
               <MaterialCommunityIcons
                 name="dots-horizontal"
-                size={24}
+                size={26}
                 color="#111827"
                 style={{
                   // borderColor: "red",
