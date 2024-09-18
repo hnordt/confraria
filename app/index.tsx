@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import Ionicons from "@expo/vector-icons/Ionicons"
+import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { Image } from "expo-image"
 import {
   useFonts,
@@ -91,6 +91,9 @@ const videos = [
   },
 ]
 
+const headings = [32, 24]
+const spacing = 24
+
 function Heading(props: { children: React.ReactNode }) {
   return (
     <View
@@ -102,7 +105,7 @@ function Heading(props: { children: React.ReactNode }) {
       <Text
         style={{
           fontFamily: "Inter_600SemiBold",
-          fontSize: 24,
+          fontSize: headings[1],
           lineHeight: 32,
           color: "#111827",
         }}
@@ -201,33 +204,86 @@ export default function Playground() {
       <View
         style={{
           backgroundColor: "#fff",
-          paddingTop: insets.top,
         }}
       >
         <View
           style={{
             flexDirection: "row",
-            marginLeft: 20,
+            // marginLeft: 20,
             alignItems: "center",
+            justifyContent: "space-between",
             gap: 2,
+            paddingTop: insets.top,
+            // paddingBottom: 12,
+            paddingHorizontal: 20,
+            // borderBottomWidth: 1,
+            // borderBottomColor: "#e5e7eb",
+            // backgroundColor: "#f3f4f6",
           }}
         >
-          <Ionicons
-            name="chevron-back"
-            size={28}
-            color="#111827"
-            style={{ marginLeft: -5 }}
-          />
-          {/* <Text
+          <View
             style={{
-              fontSize: 14,
-              fontFamily: "Inter_500Medium",
-              color: "#111827",
+              width: 30,
+              height: 30,
+              backgroundColor: "#f3f4f6",
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: 16,
             }}
           >
-            Voltar
-          </Text> */}
+            <MaterialCommunityIcons
+              name="chevron-left"
+              size={26}
+              color="#111827"
+              style={
+                {
+                  // borderColor: "red",
+                  // borderWidth: 1,
+                  // marginRight: -0.5,
+                  // marginBottom: -0.5,
+                }
+              }
+            />
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              gap: 8,
+              // display: "none",
+            }}
+          >
+            <View
+              style={{
+                width: 30,
+                height: 30,
+                backgroundColor: "#f3f4f6",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: 16,
+              }}
+            >
+              <MaterialCommunityIcons
+                name="dots-horizontal"
+                size={24}
+                color="#111827"
+                style={{
+                  // borderColor: "red",
+                  // borderWidth: 4,
+                  // marginRight: -0.5,
+                  marginTop: 0.5,
+                  marginLeft: 1,
+                }}
+              />
+            </View>
+          </View>
         </View>
+        <View
+          style={{
+            height: 6,
+            backgroundColor: "white",
+            marginBottom: spacing,
+          }}
+        />
         {/* <Image
           style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
           source="https://plus.unsplash.com/premium_photo-1670505062582-fdaa83c23c9e?q=80&w=2342&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -239,11 +295,12 @@ export default function Playground() {
         /> */}
         <View
           style={{
-            paddingTop: 32,
             // paddingBottom: 32,
             // alignItems: "center",
             paddingBottom: 0,
-            paddingHorizontal: 20,
+            marginHorizontal: 20,
+            // borderWidth: 1,
+            // borderColor: "red",
           }}
         >
           {/* <View
@@ -271,7 +328,7 @@ export default function Playground() {
           <Text
             style={{
               fontFamily: "Inter_700Bold",
-              fontSize: 30,
+              fontSize: headings[0],
               lineHeight: 36,
               color: "#111827",
               // color: "rgba(255, 255, 255, 0.85)",
@@ -279,17 +336,17 @@ export default function Playground() {
           >
             Treinos na academia
           </Text>
-          <Text
+          {/* <Text
             style={{
               fontFamily: "Inter_500Medium",
               color: "#6b7280",
-              fontSize: 16,
-              lineHeight: 24,
+              fontSize: 14,
+              lineHeight: 20,
               // color: "rgba(255, 255, 255, 0.65)",
             }}
           >
             21 vídeos &middot; 3h36min
-          </Text>
+          </Text> */}
         </View>
         {/* <LinearGradient
           colors={["rgba(0, 0, 0, 0.1)", "rgba(0, 0, 0, 0.5)"]}
@@ -320,7 +377,8 @@ export default function Playground() {
       </View>
       <ScrollView
         contentContainerStyle={{
-          paddingVertical: 32,
+          paddingVertical: spacing,
+          gap: spacing,
           backgroundColor: "white",
         }}
       >
@@ -328,11 +386,11 @@ export default function Playground() {
           <Heading>Segunda-feira</Heading>
           <Videos videos={videos.filter((video) => video.category === 2)} />
         </View>
-        <View style={{ marginTop: 24 }}>
+        <View>
           <Heading>Terça-feira</Heading>
           <Videos videos={videos.filter((video) => video.category === 1)} />
         </View>
-        <View style={{ marginTop: 24 }}>
+        <View>
           <Heading>Quarta-feira</Heading>
           <Videos videos={videos.filter((video) => video.category === 3)} />
         </View>
