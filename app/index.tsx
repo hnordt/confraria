@@ -249,7 +249,7 @@ export default function Playground() {
             style={{
               flexDirection: "row",
               gap: 8,
-              // display: "none",
+              display: "none",
             }}
           >
             <View
